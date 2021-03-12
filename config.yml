@@ -1,0 +1,20 @@
+language: en
+pipeline:
+- name: logger.Logger
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+- name: CRFEntityExtractor
+- name: EntitySynonymMapper
+- name: CountVectorsFeaturizer
+- name: DIETClassifier
+  epoch: 100
+- name: FallbackClassifier
+  threshold: 0.3
+  ambiguity_threshold: 0.1
+policies:
+- name: MemoizationPolicy
+- name: TEDPolicy
+- name: FormPolicy
+- name: RulePolicy
+  core_fallback_threshold: 0.3
+  core_fallback_action_name: action_default_fallback
